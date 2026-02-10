@@ -2,22 +2,38 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Ti ❤️</title>
+<title>Abisahi ❤️</title>
+
 <style>
-body {
-    background: linear-gradient(#ff9a9e, #fad0c4);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: Arial;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     overflow: hidden;
+    font-family: 'Arial', sans-serif;
 }
 
+/* 🌌 Fondo Aurora */
+body {
+    background: linear-gradient(120deg, #00ffcc, #0066ff, #00ff99);
+    background-size: 400% 400%;
+    animation: aurora 10s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ❤️ Corazón */
 .heart {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     background: red;
     position: relative;
     transform: rotate(-45deg);
@@ -27,40 +43,139 @@ body {
 .heart::before,
 .heart::after {
     content: "";
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     background: red;
     border-radius: 50%;
     position: absolute;
 }
 
-.heart::before {
-    top: -60px;
-    left: 0;
-}
-
-.heart::after {
-    left: 60px;
-    top: 0;
-}
+.heart::before { top: -100px; left: 0; }
+.heart::after { left: 100px; top: 0; }
 
 @keyframes beat {
     0% { transform: scale(1) rotate(-45deg); }
-    50% { transform: scale(1.1) rotate(-45deg); }
+    50% { transform: scale(1.15) rotate(-45deg); }
     100% { transform: scale(1) rotate(-45deg); }
+}
+
+/* 🏹 Flecha */
+.arrow {
+    position: absolute;
+    width: 300px;
+    height: 5px;
+    background: black;
+    left: -350px;
+    top: 50%;
+    animation: shoot 2s forwards;
+}
+
+@keyframes shoot {
+    to { left: 120%; }
+}
+
+/* 🎆 Fuegos artificiales */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 🌸 Flores */
+.flowers {
+    position: absolute;
+    bottom: 10px;
+    font-size: 40px;
+    animation: sway 3s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+    from { transform: translateX(-20px); }
+    to { transform: translateX(20px); }
+}
+
+/* 📸 Imagen */
+#photo {
+    width: 220px;
+    display: none;
+    animation: spin 5s linear;
+}
+
+@keyframes spin {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(360deg); }
+    100% { transform: rotateY(0deg); }
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    display: none;
 }
 
 h1 {
     color: white;
-    margin-top: 30px;
-    font-size: 28px;
+    text-shadow: 0 0 10px black;
 }
+
 </style>
 </head>
 <body>
 
-<div class="heart"></div>
-<h1>Te quiero mucho ❤️</h1>
+<canvas id="fireworks"></canvas>
+
+<div id="scene1">
+    <div class="heart"></div>
+    <div class="arrow"></div>
+    <h1>Te quiero mucho gruñón ❤️</h1>
+</div>
+
+<div class="flowers">🌸 🌼 🌺 🌷 🌹</div>
+
+<button id="btn">Toca aquí</button>
+
+<img id="photo" src="foto.png">
+
+<audio id="music" src="crybaby.mp3"></audio>
+
+<script>
+const btn = document.getElementById("btn");
+const photo = document.getElementById("photo");
+const music = document.getElementById("music");
+
+setTimeout(() => {
+    btn.style.display = "block";
+}, 4000);
+
+btn.onclick = () => {
+    document.getElementById("scene1").style.display = "none";
+    btn.style.display = "none";
+    photo.style.display = "block";
+    music.play();
+
+    setTimeout(() => {
+        photo.style.display = "none";
+        showMessage();
+    }, 5000);
+};
+
+function showMessage() {
+    const msg = document.createElement("h1");
+    msg.innerText = "BAÑATE 😠❤️";
+    document.body.appendChild(msg);
+
+    setTimeout(() => {
+        msg.remove();
+        location.reload();
+    }, 4000);
+}
+</script>
 
 </body>
 </html>
